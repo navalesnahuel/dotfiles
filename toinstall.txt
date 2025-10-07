@@ -1,0 +1,67 @@
+apps:
+zen
+ghostty
+obsidian
+tmux
+vim
+docker
+nvim
+zsh
+stremio
+bruno
+calibre
+bitwarden
+cursor
+dbeaver
+thunderbird
+proton vpn
+discord
+nautilus (fm)
+irium webcam
+libre office
+local send
+vlc 
+syncthing
+okular?
+
+funcitonalities:
+git ripgrep pavucontrol xclip jq tldr \
+shutter python3-pip rofi gimp \
+htop curl wget unzip fzf flameshot \
+bat eza picom zoxide lazygit btop mega mogrify starship
+
+programming lenguages:
+go
+zig
+rust
+python (uv)
+node? bun
+java? 
+deno?
+
+fonts:
+monaspace github 
+caskaydiamono nerd font
+
+scripts:
+dev-env
+dev-commit
+images-convert
+
+estructura:
+binarios y scripts personales: .local/bin
+configuraciones .config/
+~/personal/dev/ - aca va todo esto.
+~/personal/hub/ - aca van las notas, libros - proyectos - mini
+~/.local/
+ ├── bin/              # Scripts y ejecutables personales
+ ├── apps/             # Apps portables (nvim, ghostty, etc.)
+ ├── lang/             # Toolchains (go, zig, deno, etc.)
+ ├── services/         # Prometheus, alertmanager, etc.
+ └── scripts/          # utilidades
+
+Python	uv o pipx	~/.local
+Node / Bun	nvm o bun	~/.nvm o ~/.bun
+Go	tar oficial o pacman	~/go/bin
+Rust	rustup	~/.cargo/bin
+Zig	tar + ln -s o yay	/usr/local/bin

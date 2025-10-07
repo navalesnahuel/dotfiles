@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+sudo pacman -Syu --noconfirm
+
+if ! command -v git &>/dev/null; then
+    sudo pacman -S --noconfirm git
+fi
+
+if [ ! -d $HOME/personal ]; then
+    mkdir $HOME/personal
+fi
+
+git clone https://github.com/navalesnahuel/devfiles $HOME/personal/dev
+
+pushd $HOME/personal/dev
+chmod +x ./run ./dev-env
+chmod +x ./runs/*
+
+export DEV_ENV="$(pwd)"
+./run
+./dev-env
+popd

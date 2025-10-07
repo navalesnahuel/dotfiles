@@ -9,13 +9,13 @@ if [ ! -d $HOME/personal ]; then
     mkdir $HOME/personal
 fi
 
-git clone https://github.com/navalesnahuel/devfiles $HOME/personal/dev
+git clone https://github.com/navalesnahuel/dotfiles $HOME/personal/dev
 
 pushd $HOME/personal/dev
 chmod +x ./run ./dev-env
 chmod +x ./runs/*
 
 export DEV_ENV="$(pwd)"
-./run
-./dev-env
+# ./run
+# ./dev-env
 popd

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e  
+
+FONT_DIR="$HOME/.local/share/fonts"
+mkdir -p "$FONT_DIR"
+
+NERD_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip"
+NERD_FONT_TMP="/tmp/CascadiaMono.zip"
+curl -Lo "$NERD_FONT_TMP" "$NERD_FONT_URL"
+unzip -o "$NERD_FONT_TMP" -d "$FONT_DIR"
+
+MONA_URL="https://github.com/githubnext/monaspace/releases/download/v1.301/monaspace-nerdfonts-v1.301.zip"
+MONA_ZIP="/tmp/monaspace-nerdfonts-v1.301.zip"
+curl -Lo "$MONA_ZIP" "$MONA_URL"
+
+unzip -o "$MONA_ZIP" -d "$FONT_DIR"
+rm "$MONA_ZIP"
+rm "$NERD_FONT_TMP"
+
+fc-cache -fv

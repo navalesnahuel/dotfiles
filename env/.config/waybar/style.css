@@ -1,0 +1,53 @@
+* {
+    background-color: #121212;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    font-family: CaskaydiaMono Nerd Font;
+    font-size: 14px;
+}
+
+.modules-left {
+    margin-left: 8px;
+}
+
+.modules-right {
+    margin-right: 8px;
+}
+
+#workspaces button {
+    all: initial;
+    padding: 0 6px;
+    margin: 0 1.5px;
+    min-width: 9px;
+    color: #ffffff;
+}
+
+#workspaces button.empty {
+    opacity: 0.5;
+}
+
+
+#cpu,
+#network,
+#pulseaudio {
+    padding: 2px;
+    color: #ffffff;
+}
+
+
+tooltip {
+    padding: 2px;
+    color: #ffffff;
+}
+
+#clock {
+    margin-left: 8.75px;
+    color: #ffffff;
+}
+
+.hidden {
+    opacity: 0;
+}

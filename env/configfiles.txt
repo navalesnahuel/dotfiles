@@ -1,6 +1,0 @@
-.config/
-.local
-.zsh
-.zsh_profile
-.profile
-etc

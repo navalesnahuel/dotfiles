@@ -1,2 +1,0 @@
-aca van los runs eg:
-docker

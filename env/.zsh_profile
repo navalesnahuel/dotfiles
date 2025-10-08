@@ -1,0 +1,30 @@
+export XDG_CONFIG_HOME=$HOME/.config
+export DEV_ENV=$HOME/personal/dev
+export DEV_ENV_HOME="$HOME/personal/dev"
+
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ ! -z "$2" ]] || [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+# locals:
+addToPathFront $HOME/.local/apps
+addToPathFront $HOME/.local/scripts
+addToPathFront $HOME/.local/bin
+
+# addToPath $HOME/.local/personal
+#
+#langs
+addToPathFront $HOME/.uv/bin
+addToPath $HOME/.cargo/bin
+export GOROOT=/usr/lib/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

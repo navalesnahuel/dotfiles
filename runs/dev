@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+sudo pacman -Syu --noconfirm ripgrep jq tldr gimp btop curl wget unzip fzf bat eza zoxide lazygit fd rofi pavucontrol imagemagick hyprcursor hyprpaper
+sudo pacman -Syu --noconfirm calibre bitwarden dbeaver thunderbird discord nautilus libreoffice-fresh vlc okular wl-clipboard playerctl waybar
+sudo pacman -Syu --noconfirm hypridle hyprpicker hyprlock

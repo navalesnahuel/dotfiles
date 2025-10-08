@@ -16,6 +16,6 @@ chmod +x ./run ./dev-env
 chmod +x ./runs/*
 
 export DEV_ENV="$(pwd)"
-# ./run
-# ./dev-env
+./run
+./dev-env
 popd

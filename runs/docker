@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -Syu --noconfirm docker containerd docker-compose
+
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+
+sudo usermod -aG docker "$USER"

@@ -26,17 +26,6 @@ export FZF_COMPLETION_DIR_OPTS='--walker dir,follow'
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --follow'
 
 # Directory navigation - with depth limit and cache
-fcd() {
-  local file
-  file=$(fd --type f --strip-cwd-prefix --follow \
-    | command fzf --prompt="file > ")
-  [[ -n $file ]] && nvim "$file"
-  zle reset-prompt
-}
-zle -N fcd
-bindkey '^F' fcd
-
-# Directory navigation - with depth limit and cache
 dcd() {
   local dir
   dir=$(fd --type d  --strip-cwd-prefix --follow \
@@ -117,7 +106,7 @@ bindkey '^P' fpath_any
 
 bookie() {
     local file
-    file=$(fd . /home/nahuel/Dropbox/Apps/Books --type f --hidden --max-depth 1 | fzf --multi --prompt="Select book > ")
+    file=$(fd . /home/nahuel/personal/hub/bookies --type f --hidden | fzf --multi --prompt="Select book > ")
     if [[ -n "$file" ]]; then
         echo "$file" | while IFS= read -r f; do
             okular "$f" & 

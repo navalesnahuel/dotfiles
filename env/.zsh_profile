@@ -1,7 +1,6 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export DEV_ENV=$HOME/personal/dev
 export DEV_ENV_HOME="$HOME/personal/dev"
-
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 addToPath() {
@@ -21,10 +20,9 @@ addToPathFront $HOME/.local/apps
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
 
-# addToPath $HOME/.local/personal
-#
 #langs
 addToPathFront $HOME/.uv/bin
 addToPath $HOME/.cargo/bin
+export GOPATH="$HOME/go"
 export GOROOT=/usr/lib/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

@@ -17,6 +17,7 @@ eval "$(uv generate-shell-completion zsh)"
 # alias
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+bindkey -s ^f "tmux-sessionizer\n"
 unalias ls 2>/dev/null
 alias vim=nvim
 alias ls='eza'

@@ -2,6 +2,6 @@
 
 sudo pacman -Syu --noconfirm ripgrep jq tldr gimp btop curl wget unzip fzf bat eza zoxide lazygit fd rofi pavucontrol imagemagick hyprcursor hyprpaper
 sudo pacman -Syu --noconfirm calibre bitwarden dbeaver thunderbird discord nautilus libreoffice-fresh vlc okular wl-clipboard playerctl waybar
-sudo pacman -Syu --noconfirm hypridle hyprpicker hyprlock git-delta
+sudo pacman -Syu --noconfirm hypridle hyprpicker hyprlock git-delta impala
 
 yay -S hyprshot obsidian stremio protonvpn-cli-ng yazi mpv localsend-bin zen-browser-bin cursor-bin bruno-bin hyprshade --noconfirm

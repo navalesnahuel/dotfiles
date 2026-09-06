@@ -2,6 +2,12 @@ export DEV_ENV="$HOME/personal/dev"
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
 
+export EDITOR=nvim
+export VISUAL=nvim
+export GIT_EDITOR=nvim
+export SUDO_EDITOR=nvim
+export SELECTED_EDITOR=nvim
+
 typeset -U path
 
 path=(

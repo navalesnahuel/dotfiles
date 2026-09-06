@@ -19,7 +19,7 @@ hl.env("MOZ_DISABLE_RDD_SANDBOX", "1")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
-hl.env("HYPRSHOT_DIR", "~/Pictures/screenshots")
+hl.env("HYPRSHOT_DIR", "/home/nahuel/Pictures/screenshots")
 
 -- Default programs i use.
 local terminal = "kitty"
@@ -36,7 +36,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprshade on ~/.config/hypr/shaders/digital-vibrance.glsl")
 	hl.exec_cmd(terminal, { workspace = "1 silent" })
 	hl.exec_cmd(browser, { workspace = "2 silent" })
-	hl.exec_cmd("obsidian", { workspace = "4 silent" })
+	hl.exec_cmd("obsidian", { workspace = "special:notes silent" })
 end)
 
 -- Workspace rules.
@@ -50,6 +50,10 @@ hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 0 })
 -- Binds.
 local mainMod = "SUPER"
 
+-- REMOVE:
+hl.bind("mouse:276", hl.dsp.focus({ workspace = "-1" }))
+hl.bind("mouse:275", hl.dsp.focus({ workspace = "+1" }))
+
 -- WaybarToggle this binds shows/hides the gaps/borders from windows depending on waybar status.
 local waybar_visible = false
 hl.bind(mainMod .. " + GRAVE", function()
@@ -60,9 +64,9 @@ hl.bind(mainMod .. " + GRAVE", function()
 		hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 12, gaps_in = 6 })
 		hl.workspace_rule({ workspace = "f[1]", gaps_out = 12, gaps_in = 6 })
 		hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
-		hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, rounding = 12 })
+		hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, rounding = 10 })
 		hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })
-		hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 12 })
+		hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 10 })
 	else
 		-- waybar oculta: sin gaps/border/rounding
 		hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
@@ -74,8 +78,11 @@ hl.bind(mainMod .. " + GRAVE", function()
 	end
 end)
 
+hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("notes"))
+
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("~/.config/hypr/scripts/theme-picker.sh"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/wallpaper.sh"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("DEV_ENV=/home/nahuel/personal/dev /home/nahuel/personal/dev/dev-env"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprpicker -a"))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 
@@ -86,7 +93,7 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
 
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + Q", hl.dsp.window.kill())
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
@@ -118,9 +125,9 @@ hl.config({
 	general = {
 		gaps_in = 6,
 		gaps_out = 12,
-		border_size = 2,
+		border_size = 1,
 		col = {
-			active_border = "rgba(33383Dff)",
+			active_border = "rgba(2a2a2aff)",
 			inactive_border = "rgba(59595900)",
 		},
 		resize_on_border = false,
@@ -129,7 +136,7 @@ hl.config({
 	},
 
 	decoration = {
-		rounding = 12,
+		rounding = 10,
 		active_opacity = 1.0,
 		inactive_opacity = 0.95,
 

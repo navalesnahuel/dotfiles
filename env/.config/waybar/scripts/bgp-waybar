@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+export PATH="$HOME/go/bin:$PATH"
+key="${1:-play}"
+
+fmt() { local s="${1%.*}"; local h=$((s/3600)) m=$(((s%3600)/60)) sec=$((s%60)); [ "$h" -gt 0 ] && printf "%d:%02d:%02d" "$h" "$m" "$sec" || printf "%d:%02d" "$m" "$sec"; }
+
+case "$key" in
+  play|prev|next|loop|vol|name)
+    data=$(bgp status --json 2>/dev/null)
+    has() { [ -n "$data" ] && [ "$(echo "$data" | jq -r '.ok')" = "true" ] && cur=$(echo "$data" | jq -r '.data.current') && [ -n "$cur" ] && [ "$cur" != "null" ]; }
+    case "$key" in
+      play)
+        if ! has; then echo '{"text":"󰐊","class":"stopped","tooltip":""}'; exit 0; fi
+        p=$(echo "$data" | jq -r '.data.is_paused')
+        [ "$p" = "true" ] && echo '{"text":"󰐊","class":"paused","tooltip":""}' || echo '{"text":"󰏤","class":"playing","tooltip":""}'
+        ;;
+      prev|next)
+        v=$(echo "$data" | jq -r ".data.$([ "$key" = "prev" ] && echo "previous" || echo "next")")
+        if [ -z "$v" ] || [ "$v" = "null" ]; then c="bgp-disabled"; else c="bgp-control"; fi
+        i=$([ "$key" = "prev" ] && echo "󰒮" || echo "󰒭")
+        echo "{\"text\":\"$i\",\"class\":\"$c\",\"tooltip\":\"\"}"
+        ;;
+      loop)
+        l=$(echo "$data" | jq -r '.data.loop // "off"')
+        case "$l" in "all") c="loop-all"; icon="󰑖" ;; "one") c="loop-one"; icon="󰑘" ;; *) c="loop-off"; icon="󰑗" ;; esac
+        echo "{\"text\":\"$icon\",\"class\":\"$c\",\"tooltip\":\"\"}"
+        ;;
+      vol)
+        v=$(echo "$data" | jq -r '.data.volume // 0' 2>/dev/null)
+        [ -z "$v" ] || [ "$v" = "null" ] && v=0
+        if [ "$v" -eq 0 ]; then icon="󰝟"; elif [ "$v" -le 50 ]; then icon="󰕿"; else icon="󰕾"; fi
+        echo "{\"text\":\"$icon\",\"class\":\"$([ "$v" -eq 0 ] && echo "muted" || echo "bgp-control")\",\"tooltip\":\"$v%\"}"
+        ;;
+      name)
+        if ! has; then echo '{"text":"","class":"stopped","tooltip":""}'; exit 0; fi
+        p=$(echo "$data" | jq -r '.data.is_paused')
+        name=$(basename "$(echo "$data" | jq -r '.data.current')"); name="${name%.*}"
+        m=18
+        if [ "${#name}" -gt "$m" ]; then
+          o=$(( $(date +%s) / 1 % (${#name} - m + 1) ))
+          name="${name:$o:$m}"
+        fi
+        echo "{\"text\":\"$name\",\"class\":\"$([ "$p" = "true" ] && echo "paused" || echo "playing")\",\"tooltip\":\"\"}"
+        ;;
+    esac
+    ;;
+  toggle-play)
+    data=$(bgp status --json 2>/dev/null)
+    if [ -z "$data" ]; then exit 0; fi
+    ok=$(echo "$data" | jq -r '.ok')
+    cur=$(echo "$data" | jq -r '.data.current')
+    if [ "$ok" != "true" ] || [ -z "$cur" ] || [ "$cur" = "null" ]; then
+      bgp play
+    else
+      bgp pause
+    fi
+    pkill -RTMIN+5 waybar 2>/dev/null
+    ;;
+  cycle-loop)
+    cur=$(bgp status --json 2>/dev/null | jq -r '.data.loop // "off"')
+    case "$cur" in "off") n="all" ;; "all") n="one" ;; *) n="off" ;; esac
+    bgp loop "$n"; pkill -RTMIN+5 waybar 2>/dev/null
+    ;;
+  adj-vol)
+    delta="${2:-5}"
+    cur=$(bgp status --json 2>/dev/null | jq -r '.data.volume // 50')
+    new=$((cur + delta)); [ "$new" -lt 0 ] && new=0; [ "$new" -gt 100 ] && new=100
+    bgp volume "$new"; pkill -RTMIN+5 waybar 2>/dev/null
+    ;;
+  toggle-vol)
+    sf="/tmp/bgp-volume-prev"
+    cur=$(bgp status --json 2>/dev/null | jq -r '.data.volume // 0')
+    if [ "$cur" -eq 0 ]; then
+      bgp volume "$(cat "$sf" 2>/dev/null || echo 50)"
+    else
+      echo "$cur" > "$sf"; bgp volume 0
+    fi
+    pkill -RTMIN+5 waybar 2>/dev/null
+    ;;
+  seek)
+    delta="${2:-10}"
+    data=$(bgp status --json 2>/dev/null)
+    pos=$(echo "$data" | jq -r '.data.position // 0')
+    dur=$(echo "$data" | jq -r '.data.duration // 0')
+    new=$(awk "BEGIN{print $pos + $delta}")
+    [ "$(awk "BEGIN{print ($new < 0) ? 1 : 0}")" -eq 1 ] && new=0
+    [ "$(awk "BEGIN{print ($new > $dur) ? 1 : 0}")" -eq 1 ] && new=$dur
+    bgp seek "${new%.*}"; pkill -RTMIN+5 waybar 2>/dev/null
+    ;;
+esac

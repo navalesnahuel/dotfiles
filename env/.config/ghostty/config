@@ -1,0 +1,66 @@
+command = "tmux new-session -A -s master"
+
+font-family = CommitMono20
+font-family-bold = CommitMono20
+font-family-italic = CommitMono20 Italic
+font-family-bold-italic = CommitMono20 Italic
+font-size = 12
+
+# kitty renders slightly heavier; ghostty needs artificial thickening to match
+# tune 0 -> 1 (0.5 is a good middle ground)
+font-thicken = 1
+font-feature = -liga
+font-feature = -calt
+font-feature = -dlig
+
+# window-padding-x = 120,120
+window-decoration = false
+resize-overlay = never
+background-opacity = 1
+background-blur-radius = 20
+
+confirm-close-surface = false
+mouse-hide-while-typing = true
+
+cursor-style = block
+cursor-style-blink = false
+
+keybind=alt+one=unbind
+keybind=alt+two=unbind
+keybind=alt+three=unbind
+keybind=alt+four=unbind
+keybind=alt+five=unbind
+keybind=alt+six=unbind
+keybind=alt+seven=unbind
+keybind=alt+eight=unbind
+keybind=alt+nine=unbind
+
+keybind = ctrl+up=increase_font_size:0.5
+keybind = ctrl+down=decrease_font_size:0.5
+
+palette = 0=#131416
+palette = 1=#E66B80
+palette = 2=#5FC878
+palette = 3=#ECA25C
+palette = 4=#A1DEEA
+palette = 5=#5AA6E6
+palette = 6=#5FD3BB
+palette = 7=#DCE5E5
+
+palette = 8=#33383D
+palette = 9=#EDABB6
+palette = 10=#98D6A7
+palette = 11=#F0C79F
+palette = 12=#D5EAEF
+palette = 13=#9CC7EC
+palette = 14=#9BDED0
+palette = 15=#F3F6F6
+
+background = #181A1C
+foreground = #DCE5E5
+
+cursor-color = #DCE5E5
+cursor-text = #181A1C
+
+selection-background = #33383D
+selection-foreground = #DCE5E5

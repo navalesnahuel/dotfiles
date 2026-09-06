@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# mic-waybar - show mic mute/volume with nf-md icons, click to mute
+# Icons: 󰍭 muted f036d, 󰍮 outline little f036e, 󰍬 high f036c
+
+vol=$(pactl get-source-volume @DEFAULT_SOURCE@ 2>/dev/null | grep -oP '\d+%' | head -1 | tr -d '%' )
+[ -z "$vol" ] && vol=0
+# pactl returns multiple channels, take first
+is_muted=$(pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null | grep -q "yes" && echo "yes" || echo "no")
+
+if [ "$is_muted" = "yes" ]; then
+    icon="󰍭"
+    cls="muted"
+    tooltip="mic muted ${vol}%"
+elif [ "$vol" -le 50 ]; then
+    icon="󰍮"
+    cls="low"
+    tooltip="mic ${vol}%"
+else
+    icon="󰍬"
+    cls="high"
+    tooltip="mic ${vol}%"
+fi
+
+# Handle disconnected / no source
+if ! pactl info >/dev/null 2>&1; then
+    icon="󰍭"
+    cls="muted"
+    tooltip="mic unavailable"
+fi
+
+printf '{"text":"%s","class":"%s","tooltip":"%s"}\n' "$icon" "$cls" "$tooltip"

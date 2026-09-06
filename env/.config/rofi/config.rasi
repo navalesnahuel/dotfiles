@@ -1,49 +1,58 @@
-@import "~/.config/colors/current/rofi.rasi"
+@import "~/.config/rofi/theme.rasi"
+
+configuration {
+  drun-display-format: "{name}";
+  display-drun: "";
+  show-icons: true;
+}
 
 * {
   background-color: transparent;
   text-color: @fg;
-  font: "Inter 12";
+  font: "GeistMono Nerd Font Medium 11";
   spacing: 0;
 }
 
 window {
-  background-color: @bg;
-  border: 2px solid;
+  background-color: @bg-alt;
+  border: 1px solid;
   border-color: @border;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 0;
-  width: 50%;
+  width: 34%;
   location: center;
   y-offset: 0;
 }
 
 mainbox {
-  padding: 4px;
-  spacing: 4px;
+  padding: 8px;
+  spacing: 8px;
   border: 0;
 }
 
 inputbar {
-  padding: 8px 12px;
+  padding: 6px 10px 10px 10px;
   spacing: 8px;
-  background-color: @bg-alt;
+  background-color: transparent;
   text-color: @fg;
-  border-radius: 4px;
-  margin: 4px;
+  border: 0px 0px 1px 0px solid;
+  border-color: @border;
+  margin: 0;
   children: [ prompt, entry ];
 }
 
 prompt {
   enabled: true;
   text-color: @prompt;
-  str: "› ";
+  str: " ";
+  vertical-align: 0.5;
 }
 
 entry {
   text-color: @fg;
-  placeholder-color: #6E797E;
-  placeholder: "";
+  placeholder-color: @info;
+  placeholder: "Search…";
+  vertical-align: 0.5;
 }
 
 case-indicator {
@@ -51,30 +60,31 @@ case-indicator {
 }
 
 listview {
-  padding: 4px;
-  spacing: 2px;
+  padding: 4px 0px;
+  spacing: 6px;
   lines: 6;
-  fixed-height: false;
+  fixed-height: true;
   scrollbar: false;
   border: 0;
+  dynamic: false;
 }
 
 element {
-  padding: 8px 12px;
-  spacing: 12px;
+  padding: 6px 10px;
+  spacing: 10px;
   border: 0;
-  border-radius: 4px;
-  background-color: @bg;
+  border-radius: 10px;
+  background-color: transparent;
   text-color: @fg;
 }
 
 element normal.normal {
-  background-color: @bg;
+  background-color: transparent;
   text-color: @fg;
 }
 
 element alternate.normal {
-  background-color: @bg;
+  background-color: transparent;
   text-color: @fg;
 }
 
@@ -94,6 +104,7 @@ element-icon {
   background-color: transparent;
   size: 1.2em;
   text-color: inherit;
+  vertical-align: 0.5;
 }
 
 message {
@@ -101,8 +112,8 @@ message {
   background-color: @bg-alt;
   text-color: @fg;
   border: 0;
-  margin: 4px;
-  border-radius: 4px;
+  margin: 0;
+  border-radius: 10px;
 }
 
 textbox {

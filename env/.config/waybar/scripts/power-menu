@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+entries="Shutdown\nReboot\nLogout\nSuspend"
+
+selected=$(printf "%b" "$entries" | rofi -dmenu -theme ~/.config/rofi/power.rasi)
+
+case "$selected" in
+  Shutdown) systemctl poweroff ;;
+  Reboot)   systemctl reboot ;;
+  Logout)   hyprctl dispatch exit ;;
+  Suspend)  systemctl suspend ;;
+esac

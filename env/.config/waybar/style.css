@@ -1,0 +1,284 @@
+* {
+    font-family: "GeistMono Nerd Font", monospace;
+    font-size: 13px;
+    font-feature-settings: "ss09";
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(24, 26, 28, 0.35);
+    color: #d4dddd;
+    border-radius: 0;
+    border: none;
+}
+
+window#waybar > box {
+    padding: 0;
+}
+
+#workspaces {
+    background: transparent;
+    border-radius: 0;
+    padding: 0 4px;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 0 7px;
+    margin: 0;
+    color: #d4dddd;
+    background: transparent;
+    min-width: 0;
+    border: none;
+    box-shadow: none;
+    font-weight: 500;
+}
+
+#workspaces button.empty {
+    color: #6B7D7F;
+}
+
+#workspaces button.active {
+    background: transparent;
+    color: #d4dddd;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+#workspaces button.urgent {
+    background: transparent;
+    color: #e87777;
+    font-weight: 500;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+    color: #d4dddd;
+}
+
+#clock {
+    background: transparent;
+    border-radius: 0;
+    padding: 0 18px;
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    font-feature-settings: "ss09";
+}
+
+#pulseaudio,
+#cpu,
+#memory,
+#network,
+#bluetooth,
+#custom-mic {
+    background: transparent;
+    padding: 0 4px;
+    margin: 0;
+    color: #d4dddd;
+    font-weight: 500;
+    min-width: 28px;
+    font-size: 16px;
+    font-feature-settings: "ss09";
+    border-radius: 0;
+    transition: color 150ms ease;
+}
+
+#custom-bgp-prev,
+#custom-bgp,
+#custom-bgp-next,
+#custom-bgp-loop,
+#custom-bgp-volume {
+    background: transparent;
+    margin: 0;
+    color: #d4dddd;
+    font-weight: 500;
+    font-feature-settings: "ss09";
+    border-radius: 0;
+    font-size: 16px;
+    transition: color 150ms ease;
+}
+
+#custom-bgp-name {
+    background: transparent;
+    margin: 0;
+    color: #d4dddd;
+    font-weight: 500;
+    font-feature-settings: "ss09";
+    border-radius: 0;
+}
+
+#pulseaudio {
+    border-radius: 0;
+    margin: 0;
+    padding: 0 4px;
+}
+
+#network {
+    border-radius: 0;
+    margin: 0;
+    padding: 0 4px;
+}
+
+#bluetooth {
+    border-radius: 0;
+    margin: 0 8px 0 0;
+    padding: 0 4px;
+}
+
+#custom-mic {
+    border-radius: 0;
+    margin: 0;
+    padding: 0 4px;
+    min-width: 28px;
+}
+
+#custom-bgp-prev {
+    border-radius: 0;
+    margin-left: 0;
+    padding: 0 4px;
+}
+
+#custom-bgp,
+#custom-bgp-next {
+    padding: 0 4px;
+}
+
+#custom-bgp-loop {
+    padding: 0 4px;
+}
+
+#custom-bgp-volume {
+    border-radius: 0;
+    margin-right: 0;
+    padding: 0 4px;
+    min-width: 28px;
+}
+
+#custom-bgp-name {
+    padding: 0 13px 0 4px;
+    min-width: 150px;
+}
+
+#custom-bgp-prev:hover,
+#custom-bgp:hover,
+#custom-bgp-next:hover,
+#custom-bgp-loop:hover,
+#custom-bgp-volume:hover,
+#custom-bgp-name:hover {
+    color: #E6EDED;
+}
+
+#pulseaudio:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#bluetooth:hover,
+#custom-mic:hover {
+    color: #E6EDED;
+}
+
+#custom-bgp-prev.bgp-disabled,
+#custom-bgp-next.bgp-disabled {
+    color: #6B7D7F;
+}
+
+#custom-bgp.stopped {
+    color: #6B7D7F;
+}
+
+#custom-bgp.paused {
+    color: #d4dddd;
+}
+
+#custom-bgp-loop.loop-off {
+    color: #6B7D7F;
+}
+
+#custom-bgp-loop.loop-all {
+    color: #d4dddd;
+}
+
+#custom-bgp-loop.loop-one {
+    color: #e0b074;
+}
+
+#custom-bgp-name.stopped {
+    color: #6B7D7F;
+}
+
+#custom-bgp-volume.muted {
+    color: #6B7D7F;
+}
+
+#pulseaudio.muted {
+    color: #6B7D7F;
+}
+
+#custom-mic.muted {
+    color: #e87777;
+}
+
+#custom-mic.low {
+    color: #e0b074;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: #e0b074;
+}
+
+#cpu.critical,
+#memory.critical {
+    color: #e87777;
+}
+
+#network.disconnected {
+    color: #e87777;
+}
+
+#bluetooth.off,
+#bluetooth.disabled,
+#bluetooth.no-controller {
+    color: #6B7D7F;
+}
+
+#bluetooth.connected {
+    color: #d4dddd;
+}
+
+#custom-power {
+    background: transparent;
+    color: #d4dddd;
+    padding: 0 8px;
+    margin: 0 0 0 8px;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 16px;
+    min-width: 20px;
+    transition: color 150ms ease;
+}
+
+#custom-power:hover {
+    color: #E6EDED;
+}
+
+tooltip {
+    background: rgba(31, 36, 38, 0.35);
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+tooltip label {
+    color: #d4dddd;
+    font-family: "GeistMono Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
